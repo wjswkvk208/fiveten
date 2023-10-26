@@ -1,0 +1,202 @@
+{
+  "games": [
+    {
+      "id": "aaaaaa",
+      "players": [
+        {
+          "name": "김사장",
+          "money": 0,
+          "score": 0
+        },
+        {
+          "name": "박대표",
+          "money": 0,
+          "score": 0
+        }
+      ],
+      "rules": {
+        "내기금액": 5000,
+        "버디보너스": 10000,
+        "무승부두배판": true,
+        "쓰리동타": true,
+        "트리플버디배판": true
+      },
+      "scores": {}
+    },
+    {
+      "id": "5Y6nrq",
+      "players": [],
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "WrFqQx",
+      "players": [],
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "cHEgGG",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "WbdNkk",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": "ChPctyc"
+    },
+    {
+      "id": "GPnGm2p"
+    },
+    {
+      "id": "P0ERMj9"
+    },
+    {
+      "id": "srBSpKY"
+    },
+    {
+      "id": "oGgtNSL"
+    },
+    {
+      "id": "53N0mqS",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "K7HYejt",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "_ov4upW",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "FCZ3e_a",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "12819D0",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "GTrqnFk",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "Cz_PbF3",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "SYIiH03",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "T6WZvRb",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "MfLZPTU",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "7KSu1OQ",
+      "rules": {},
+      "score": {}
+    },
+    {
+      "id": "Kgftwgy",
+      "rules": {
+        "금액": 5000,
+        "버디금액": 10000,
+        "이글금액": 30000,
+        "쓰리동타": true,
+        "트리플": true,
+        "무승부": true
+      },
+      "score": {}
+    }
+  ],
+  "players": [
+    {
+      "name": "",
+      "money": 0,
+      "score": {},
+      "gameId": "53N0mqS",
+      "id": 1
+    },
+    {
+      "name": "",
+      "money": 0,
+      "score": {},
+      "gameId": "53N0mqS",
+      "id": 2
+    },
+    {
+      "name": "",
+      "money": 0,
+      "score": {},
+      "gameId": "53N0mqS",
+      "id": 3
+    },
+    {
+      "name": "",
+      "money": 0,
+      "score": {},
+      "gameId": "53N0mqS",
+      "id": 4
+    },
+    {
+      "name": "개새야",
+      "money": 0,
+      "score": {},
+      "gameId": "7KSu1OQ",
+      "id": 5
+    },
+    {
+      "name": "섹스",
+      "money": 0,
+      "score": {},
+      "gameId": "7KSu1OQ",
+      "id": 6
+    },
+    {
+      "name": "섹스섹스",
+      "money": 0,
+      "score": {},
+      "gameId": "7KSu1OQ",
+      "id": 7
+    },
+    {
+      "name": "",
+      "money": 0,
+      "score": {},
+      "gameId": "Kgftwgy",
+      "id": 8
+    },
+    {
+      "name": "",
+      "money": 0,
+      "score": {},
+      "gameId": "Kgftwgy",
+      "id": 9
+    }
+  ]
+}

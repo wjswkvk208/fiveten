@@ -1,0 +1,4 @@
+{
+  "/games/:id": "/games/:id?_embed=players",
+  "/games/:id/players": "/games/:id?_embed=players"
+}
