@@ -3,12 +3,11 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Paper from "@mui/material/Paper";
-
 const inter = Inter({ subsets: ["latin"] });
-
 import { cookies } from "next/headers";
 import { Container, Typography } from "@mui/material";
 import CustomStepper from "@/components/Stepper";
+import Copyright from "@/components/Copyright";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_META_TITLE,
@@ -31,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {children}
 
+            <Copyright url={process.env.NEXT_PUBLIC_TELEGRAM_URL} sx={{ mt: 2 }} />
             <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
               <FooterTabs gameId={gameId} />
             </Paper>

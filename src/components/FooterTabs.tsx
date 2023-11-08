@@ -2,11 +2,11 @@
 import * as React from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { usePathname, useRouter } from "next/navigation";
-
+import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
+import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
+import ScoreboardOutlinedIcon from "@mui/icons-material/ScoreboardOutlined";
+import ConstructionOutlinedIcon from "@mui/icons-material/ConstructionOutlined";
 export default function FooterTabs(props: any) {
   const [value, setValue] = React.useState(0);
   const router = useRouter();
@@ -42,19 +42,11 @@ export default function FooterTabs(props: any) {
   }, [pathname]);
 
   return (
-    <BottomNavigation
-      showLabels
-      value={value}
-      // onChange={(event, newValue) => {
-
-      //   // console.log(event, newValue);
-      //   setValue(newValue);
-      // }}
-    >
-      <BottomNavigationAction label="플레이어" icon={<RestoreIcon />} onClick={() => onLink("/players")} />
-      <BottomNavigationAction label="규칙" icon={<FavoriteIcon />} onClick={() => onLink("/rules")} />
-      <BottomNavigationAction label="스코어" icon={<LocationOnIcon />} onClick={() => onLink("/scores")} />
-      <BottomNavigationAction label="커뮤니티" icon={<RestoreIcon />} onClick={() => onLink("/")} />
+    <BottomNavigation showLabels value={value}>
+      <BottomNavigationAction label="플레이어" icon={<PeopleOutlineOutlinedIcon />} onClick={() => onLink("/players")} />
+      <BottomNavigationAction label="규칙" icon={<GavelOutlinedIcon />} onClick={() => onLink("/rules")} />
+      <BottomNavigationAction label="스코어" icon={<ScoreboardOutlinedIcon />} onClick={() => onLink("/scores")} />
+      <BottomNavigationAction label="게시판" icon={<ConstructionOutlinedIcon />} onClick={() => alert("공사중")} />
     </BottomNavigation>
   );
 }
