@@ -4,30 +4,6 @@ import { CreatePlayer } from "@/hooks/Player";
 import { IPlayer } from "@/types/player.t";
 import { Button, ButtonGroup } from "@mui/material";
 
-// async function makePlayer(props: { id: string }) {
-//   console.log(props.id);
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       name: "",
-//       money: 0,
-//       score: {},
-//       gameId: props.id,
-//     }),
-//   };
-
-//   await fetch(`http://localhost:9999/players`, options)
-//     .then(res => res.json())
-//     .then(result => {
-//       console.log(result);
-//     });
-// }
-
-function makePlayer(props: { id: string }) {}
-
 function removePlayer(props: { id: string }) {
   console.log(props.id);
   const options = {
@@ -43,7 +19,7 @@ function removePlayer(props: { id: string }) {
     }),
   };
 
-  fetch(`http://localhost:9999/players/${props.id}`);
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/${props.id}`);
 }
 
 export function UserButton(props: any) {

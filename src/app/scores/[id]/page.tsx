@@ -1,28 +1,46 @@
 "use client";
-import CustomStepper from "@/components/Stepper";
-import { Box, Collapse, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import * as React from "react";
+import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-export default function Scores() {
+import useGame, { EditGame } from "@/hooks/Game";
+import { IPlayer } from "@/types/player.t";
+import PlayerInputDialog from "@/components/PlayerInputDialog";
+import { Score } from "@/types/score.t";
+import { GameScore } from "@/types/game.t";
+import BirdieModal from "@/components/EventModal";
+import ScoreBoard from "@/components/ScoreBoard";
+import CalcMoney from "@/utils/money";
+
+const mapToObject = (map: any) => Object.fromEntries(map.entries());
+
+export default function Scores({ params }: { params: { id: string } }) {
+  const { game, isLoading, error, mutate } = useGame(params.id);
   const [round, setRound] = useState("first");
+  const [hole, setHole] = useState(1);
+  // const [par, setPar] = useState(0);
+  const [open, setOpen] = useState(false);
 
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    // createData("Eclair", 262, 16.0, 24, 6.0),
-    // createData("Cupcake", 305, 3.7, 67, 4.3),
-    // createData("Gingerbread", 356, 16.0, 49, 3.9),
-  ];
+  const { trigger } = EditGame(params.id);
+  const gameInstance = new GameScore(game);
+
+  const handleClickOpen = (k: any) => {
+    setHole(Number(k));
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    if (!game) return;
+    setOpen(false);
+    trigger({ money: { ...game.money, [hole]: mapToObject(CalcMoney(hole, game)) } });
+  };
+
+  const handleHole = (e: any) => {
+    setHole(e.target.value);
+  };
 
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-      <Typography component="h1" variant="h4" align="center">
-        즐거운 골프, 스크라치
-      </Typography>
-
-      <CustomStepper />
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <ToggleButtonGroup
@@ -43,87 +61,86 @@ export default function Scores() {
 
         <Grid item xs={12}>
           <TableContainer component={Paper}>
-            <Table size="small">
+            <Table size="small" sx={{ masWidth: 518 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Hole</TableCell>
-                  <TableCell align="right">1</TableCell>
-                  <TableCell align="right">2</TableCell>
-                  <TableCell align="right">3</TableCell>
-                  <TableCell align="right">4</TableCell>
+                  <TableCell component="th" scope="row" sx={{ minWidth: 86 }}>
+                    Hole
+                  </TableCell>
 
-                  <TableCell align="right">5</TableCell>
-                  <TableCell align="right">6</TableCell>
-                  <TableCell align="right">7</TableCell>
-                  <TableCell align="right">8</TableCell>
-                  <TableCell align="right">9</TableCell>
+                  {Object.keys(Score())
+                    .filter(i => {
+                      if (round === "first") {
+                        return Number(i) < 10;
+                      } else {
+                        return Number(i) > 9;
+                      }
+                    })
+                    .map((k: string) => {
+                      return (
+                        <TableCell
+                          align="center"
+                          sx={{ px: 0 }}
+                          key={k}
+                          onClick={() => {
+                            handleClickOpen(Number(k));
+                          }}
+                        >
+                          {k}
+                        </TableCell>
+                      );
+                    })}
 
-                  <TableCell align="right">Total</TableCell>
+                  <TableCell align="center" sx={{ minWidth: 72 }}>
+                    Total
+                  </TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell>Par</TableCell>
-                  <TableCell align="right">5</TableCell>
-                  <TableCell align="right">4</TableCell>
-                  <TableCell align="right">3</TableCell>
-                  <TableCell align="right">4</TableCell>
-
-                  <TableCell align="right">4</TableCell>
-                  <TableCell align="right">5</TableCell>
-                  <TableCell align="right">4</TableCell>
-                  <TableCell align="right">3</TableCell>
-                  <TableCell align="right">4</TableCell>
+                  {game &&
+                    Object.values(game.par)
+                      .filter((v, i) => {
+                        if (round === "first") {
+                          return i < 9;
+                        } else {
+                          return i >= 9;
+                        }
+                      })
+                      .map((p: any, i: number) => (
+                        <TableCell
+                          key={i}
+                          align="center"
+                          onClick={() => {
+                            handleClickOpen(i + 1);
+                          }}
+                        >
+                          {p !== 0 ? p : "-"}
+                        </TableCell>
+                      ))}
+                  <TableCell align="center">{gameInstance.parTotal("first") + gameInstance.parTotal("second")}</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {rows.map(row => (
-                  <Score key={row.name} row={row} />
-                ))}
-              </TableBody>
             </Table>
           </TableContainer>
+
+          {game &&
+            game.players.map((player: IPlayer, index: number) => (
+              <TableContainer component={Paper} sx={{ mt: 2 }} key={player.id}>
+                <Table size="small">
+                  <TableBody>
+                    <ScoreBoard money={game.money} player={player} round={round} onClick={handleClickOpen} par={gameInstance.parTotal()} hole={hole} />
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            ))}
         </Grid>
       </Grid>
-    </Paper>
-  );
-}
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein };
-}
 
-function Score(props: { row: ReturnType<typeof createData> }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-        <TableCell component="th" scope="row">
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell align="right">4</TableCell>
-        <TableCell align="right">4</TableCell>
-        <TableCell align="right">3</TableCell>
-        <TableCell align="right">4</TableCell>
-
-        <TableCell align="right">4</TableCell>
-        <TableCell align="right">4</TableCell>
-        <TableCell align="right">3</TableCell>
-        <TableCell align="right">4</TableCell>
-
-        <TableCell align="right">4</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
+      {game && <PlayerInputDialog open={open} onClose={handleClose} /* par={par} onSetPar={handlePar} */ hole={hole} onSetHole={handleHole} game={game} />}
+      <BirdieModal />
     </>
   );
 }
+
+// import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";

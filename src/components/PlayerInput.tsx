@@ -14,12 +14,13 @@ const PlayerInput = (props: any) => {
   const { trigger } = RemovePlayer(pid);
   const { trigger: nameTrigger } = EditPlayer(pid);
   useEffect(() => {
+    if (!pid) return;
     const delayTrigger = setTimeout(() => {
-      nameTrigger({ playerName: name });
+      nameTrigger({ name: name });
     }, 1500);
 
     return () => clearTimeout(delayTrigger);
-  }, [name, nameTrigger]);
+  }, [name, nameTrigger, pid]);
   return (
     <>
       <Paper component="form" sx={{ p: "2px 4px", display: "flex", alignItems: "center" }}>

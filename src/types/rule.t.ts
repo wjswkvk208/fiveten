@@ -1,10 +1,10 @@
 interface IRule {
-  금액: number;
-  버디금액: number;
-  이글금액: number;
-  쓰리동타: boolean;
-  트리플: boolean;
-  무승부: boolean;
+  bet: number;
+  birdie: number;
+  eagle: number;
+  three: boolean;
+  triple: boolean;
+  draw: boolean;
 }
 
 export type { IRule };
