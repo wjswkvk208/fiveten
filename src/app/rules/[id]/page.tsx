@@ -35,7 +35,7 @@ export default function Rules({ params }: { params: { id: string } }) {
       trigger({ rules });
     }, 1500);
     return () => clearTimeout(delayTrigger);
-  }, [rules, trigger]);
+  }, [params, rules, trigger]);
 
   return (
     <>

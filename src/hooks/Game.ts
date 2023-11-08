@@ -1,7 +1,7 @@
 import useSWR from "swr";
 
 import { Game, IGame, IGamePlayer, IPar } from "@/types/game.t";
-import useSWRMutation from "swr/mutation";
+import useSWRMutation, { TriggerWithArgs, TriggerWithOptionsArgs } from "swr/mutation";
 import { IRule } from "@/types/rule.t";
 
 const useGame = (id: string) => {
@@ -34,7 +34,7 @@ export const EditGame = (id: string) => {
 
       body: JSON.stringify({ ...arg }),
     }).then(r => r.json());
-  const { data, trigger, isMutating } = useSWRMutation<IGame>(`${process.env.NEXT_PUBLIC_API_URL}/games/${id}`, fetcher);
+  const { data, trigger, isMutating } = useSWRMutation<IGame, any, any, any>(`${process.env.NEXT_PUBLIC_API_URL}/games/${id}`, fetcher);
 
   return { game: data, trigger, isMutating };
 };
