@@ -35,7 +35,6 @@ export default function Players(props: any) {
               onClick={async () => {
                 const result = await createTrigger(null, {
                   onSuccess: (data, key, config) => {
-                    // console.log(data, key, config, `http://localhost:9999/games/${props.params.id}`);
                     mutate();
                   },
                 });

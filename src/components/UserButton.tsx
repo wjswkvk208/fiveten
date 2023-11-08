@@ -5,7 +5,6 @@ import { IPlayer } from "@/types/player.t";
 import { Button, ButtonGroup } from "@mui/material";
 
 function removePlayer(props: { id: string }) {
-  console.log(props.id);
   const options = {
     method: "DELETE",
     headers: {

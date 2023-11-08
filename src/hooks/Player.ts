@@ -25,21 +25,11 @@ export const CreatePlayer = (id: string) => {
 export const RemovePlayer = (id: string) => {
   const options = {
     method: "DELETE",
-    headers: {
-      // "Content-Type": "application/text/xml",
-    },
-    // body: JSON.stringify({
-    //   name: "",
-    //   money: 0,
-    //   score: {},
-    //   gameId: id,
-    // }),
+    headers: {},
   };
 
   const fetcher = (url: string) => fetch(url, options);
-  // .then(r => {
-  //   console.log("delete", r);
-  // })
+
   const { trigger, isMutating } = useSWRMutation(`${process.env.NEXT_PUBLIC_API_URL}/players/${id}`, fetcher);
   return { trigger, isMutating };
 };

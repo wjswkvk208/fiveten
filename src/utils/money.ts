@@ -34,7 +34,6 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
       const s = Number(p.score);
       const par = Number(game.par[hole as keyof IPar]);
       if (s >= 3 || (par === 3 && s >= 2) || s < 0) {
-        console.log("s", s, par === 3 && s >= 2);
         double = 2;
       }
     });
@@ -60,11 +59,6 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
     );
 
     if (Object.values(obj).findIndex(e => e >= 3) >= 0) {
-      console.log(
-        "dd",
-        obj,
-        Object.values(obj).findIndex(e => e >= 3)
-      );
       double = 2;
     } else {
       double = 1;
@@ -89,12 +83,7 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
         "5": 0,
       }
     );
-    console.log(
-      "obj",
-      obj,
-      Object.values(obj).findIndex(e => e === game.players.length),
-      game.players.length
-    );
+
     if (Object.values(obj).findIndex(e => e === game.players.length) >= 0 && game.players.length >= 3) {
       prevDraw = 2;
     } else {
@@ -103,7 +92,6 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
   }
 
   ArrMatch.map((match: IPlayer[]) => {
-    console.log(double, prevDraw);
     const p1 = Number(match[0].score[hole as keyof IScore]);
     const p2 = Number(match[1].score[hole as keyof IScore]);
 
@@ -118,6 +106,5 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
     // debugger;
   });
 
-  
   return Money;
 }

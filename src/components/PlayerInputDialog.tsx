@@ -14,13 +14,11 @@ const PlayerInputDialog = (props: any) => {
   const [par, setPar] = useState(game.par);
 
   useEffect(() => {
-    //console.log(par, hole);
     if (par[hole]) {
       trigger({
         par: { ...game.par, [hole]: par[hole] },
       });
     } else if (!par[hole]) {
-      //console.log("asdf", par);
     }
   }, [par]);
 
@@ -53,10 +51,6 @@ const PlayerInputDialog = (props: any) => {
             value={par[hole]}
             exclusive
             onChange={(e, p) => {
-              // trigger({
-              //   par: { ...game.par, [hole]: p },
-              // });
-
               setPar({ ...game.par, [hole]: p });
             }}
             aria-label="Par"
