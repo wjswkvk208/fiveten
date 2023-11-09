@@ -7,12 +7,16 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 import ScoreboardOutlinedIcon from "@mui/icons-material/ScoreboardOutlined";
 import ConstructionOutlinedIcon from "@mui/icons-material/ConstructionOutlined";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import Link from "next/link";
 export default function FooterTabs(props: any) {
   const [value, setValue] = React.useState(0);
   const router = useRouter();
   const pathname = usePathname();
   const onLink = (href: string) => {
+    // console.log(href);
     if (href === "") router.push("/");
+    // else if (href === "help") router.push(href);
     else router.push(href + "/" + props.gameId);
   };
 
@@ -30,8 +34,8 @@ export default function FooterTabs(props: any) {
       url: "/scores",
     },
     {
-      label: "커뮤니티",
-      url: "/",
+      label: "도움말",
+      url: "/help",
     },
   ];
 
@@ -46,7 +50,7 @@ export default function FooterTabs(props: any) {
       <BottomNavigationAction label="플레이어" icon={<PeopleOutlineOutlinedIcon />} onClick={() => onLink("/players")} />
       <BottomNavigationAction label="규칙" icon={<GavelOutlinedIcon />} onClick={() => onLink("/rules")} />
       <BottomNavigationAction label="스코어" icon={<ScoreboardOutlinedIcon />} onClick={() => onLink("/scores")} />
-      <BottomNavigationAction label="게시판" icon={<ConstructionOutlinedIcon />} onClick={() => alert("공사중")} />
+      <BottomNavigationAction label="십계명" icon={<AutoStoriesOutlinedIcon />} onClick={() => router.push("/help")} />
     </BottomNavigation>
   );
 }
