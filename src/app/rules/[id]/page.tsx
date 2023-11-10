@@ -1,19 +1,13 @@
 "use client";
-import CustomStepper from "@/components/Stepper";
-import { EditGame } from "@/hooks/Game";
-import { Checkbox, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
+
+import useGame, { EditGame } from "@/hooks/Game";
+import { Alert, Checkbox, CircularProgress, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Rules({ params }: { params: { id: string } }) {
+  const { game, isLoading, error } = useGame(params.id);
   const { trigger } = EditGame(params.id);
-  const [rules, setRules] = useState({
-    bet: 5000,
-    birdie: 10000,
-    eagle: 30000,
-    triple: true,
-    three: true,
-    draw: true,
-  });
+  const [rules, setRules] = useState({ ...game?.rules });
 
   const handleChangeRule = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRules({
@@ -44,6 +38,9 @@ export default function Rules({ params }: { params: { id: string } }) {
       </Typography>
 
       <Grid container spacing={3}>
+        {isLoading && <CircularProgress />}
+        {error && <Alert severity="error">수리중...</Alert>}
+
         <Grid item xs={12}>
           <TextField required name="bet" label="타 당 얼마?" fullWidth placeholder="5000" value={rules.bet} onChange={handleChangeAmount} />
         </Grid>

@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Alert, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
 
 import useGame, { EditGame } from "@/hooks/Game";
@@ -18,7 +18,7 @@ export default function Scores({ params }: { params: { id: string } }) {
   const { game, isLoading, error, mutate } = useGame(params.id);
   const [round, setRound] = useState("first");
   const [hole, setHole] = useState(1);
-  // const [par, setPar] = useState(0);
+
   const [open, setOpen] = useState(false);
 
   const { trigger } = EditGame(params.id);
@@ -42,6 +42,9 @@ export default function Scores({ params }: { params: { id: string } }) {
   return (
     <>
       <Grid container spacing={3}>
+        {isLoading && <CircularProgress />}
+        {error && <Alert severity="error">수리중...</Alert>}
+
         <Grid item xs={12}>
           <ToggleButtonGroup
             color="primary"

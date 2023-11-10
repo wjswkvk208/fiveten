@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, ButtonGroup, Grid, Paper, Typography } from "@mui/material";
+import { Alert, Box, Button, ButtonGroup, CircularProgress, Grid, Paper, Typography } from "@mui/material";
 import { IPlayer } from "@/types/player.t";
 import useGame, { CreateGame } from "@/hooks/Game";
 import { CreatePlayer, RemovePlayer } from "@/hooks/Player";
@@ -10,10 +10,11 @@ export default function Players(props: any) {
   const { game, isLoading, error, mutate } = useGame(props.params.id);
   const { player, trigger: createTrigger, isMutating: createMutate } = CreatePlayer(props.params.id);
 
-  if (isLoading || error) return <></>;
   return (
     <>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justifyContent="center">
+        {isLoading && <CircularProgress />}
+        {error && <Alert severity="error">수리중...</Alert>}
         {game &&
           game.players.map((player: IPlayer, index: number) => (
             <Grid item xs={12} key={player._id}>
