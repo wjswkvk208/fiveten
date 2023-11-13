@@ -32,8 +32,9 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
   let prevDraw = 1; //전판 두배판 체크
   if (game.rules.triple) {
     game.players.forEach(p => {
-      const s = Number(p.score);
+      const s = Number(p.score[hole as keyof IScore]);
       const par = Number(game.par[hole as keyof IPar]);
+
       if (s >= 3 || (par === 3 && s >= 2) || s < 0) {
         double = 2;
       }
@@ -61,8 +62,6 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
 
     if (Object.values(obj).findIndex(e => e >= 3) >= 0) {
       double = 2;
-    } else {
-      double = 1;
     }
   }
 
