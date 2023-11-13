@@ -40,7 +40,7 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
     });
   }
 
-  if (game.rules.three) {
+  if (game.rules.three && game.players.length >= 4) {
     const obj = game.players.reduce(
       (acc, cur) => {
         const s = cur.score[hole as keyof IPar]?.toString();
