@@ -26,23 +26,38 @@ export type typeTitles = {
 };
 export function eightTeen() {
   return {
-    1: {} as typeTitle,
-    2: {} as typeTitle,
-    3: {} as typeTitle,
-    4: {} as typeTitle,
-    5: {} as typeTitle,
-    6: {} as typeTitle,
-    7: {} as typeTitle,
-    8: {} as typeTitle,
-    9: {} as typeTitle,
-    10: {} as typeTitle,
-    11: {} as typeTitle,
-    12: {} as typeTitle,
-    13: {} as typeTitle,
-    14: {} as typeTitle,
-    15: {} as typeTitle,
-    16: {} as typeTitle,
-    17: {} as typeTitle,
-    18: {} as typeTitle,
+    1: {
+      birdie: [],
+      eagle: [],
+    } as typeTitle,
+    2: {
+      birdie: [],
+      eagle: [],
+    } as typeTitle,
+    3: {
+      birdie: [],
+      eagle: [],
+    } as typeTitle,
+    4: {
+      birdie: [],
+      eagle: [],
+    } as typeTitle,
+    5: {
+      birdie: [],
+      eagle: [],
+    } as typeTitle,
+    6: { birdie: [], eagle: [] } as typeTitle,
+    7: { birdie: [], eagle: [] } as typeTitle,
+    8: { birdie: [], eagle: [] } as typeTitle,
+    9: { birdie: [], eagle: [] } as typeTitle,
+    10: { birdie: [], eagle: [] } as typeTitle,
+    11: { birdie: [], eagle: [] } as typeTitle,
+    12: { birdie: [], eagle: [] } as typeTitle,
+    13: { birdie: [], eagle: [] } as typeTitle,
+    14: { birdie: [], eagle: [] } as typeTitle,
+    15: { birdie: [], eagle: [] } as typeTitle,
+    16: { birdie: [], eagle: [] } as typeTitle,
+    17: { birdie: [], eagle: [] } as typeTitle,
+    18: { birdie: [], eagle: [] } as typeTitle,
   };
 }
