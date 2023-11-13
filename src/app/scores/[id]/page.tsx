@@ -14,6 +14,7 @@ import CalcMoney from "@/utils/money";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import useTitles from "@/hooks/Title";
+import { typeTitles } from "@/types/title.t";
 
 const mapToObject = (map: any) => Object.fromEntries(map.entries());
 
@@ -24,7 +25,7 @@ export default function Scores({ params }: { params: { id: string } }) {
   const [hole, setHole] = useState(1);
 
   const [open, setOpen] = useState(false);
-  const [titles, setTitles] = useTitles(game as IGamePlayer);
+  const [titles, saveTitles] = useTitles(game as IGamePlayer);
   const MySwal = withReactContent(Swal);
   const { trigger } = EditGame(params.id);
   const gameInstance = new GameScore(game);
@@ -37,13 +38,13 @@ export default function Scores({ params }: { params: { id: string } }) {
   const handleClose = () => {
     if (!game) return;
 
-    setTitles(hole as number);
+    saveTitles(hole as number);
     setOpen(false);
     trigger({ money: { ...game.money, [hole]: mapToObject(CalcMoney(hole, game)) } });
   };
 
   React.useEffect(() => {
-    if (titles && titles[hole]?.birdie.length) {
+    if (titles && titles[hole as keyof typeTitles].birdie.length) {
       MySwal.fire({
         title: <p>Nice Birdie!</p>,
         icon: "success",
@@ -54,7 +55,7 @@ export default function Scores({ params }: { params: { id: string } }) {
       });
     }
 
-    if (titles && titles[hole]?.eagle.length) {
+    if (titles && titles[hole as keyof typeTitles].eagle.length) {
       MySwal.fire({
         title: <p>Amazing Eagle!</p>,
         icon: "success",

@@ -1,14 +1,10 @@
 import { IGamePlayer } from "@/types/game.t";
 import { IScore } from "@/types/score.t";
+import { eightTeen, typeTitles } from "@/types/title.t";
 import { useCallback, useState } from "react";
 
-// export type typeTitle = {
-//   // hole: number;
-//   birdie: Array<string>;
-//   eagle: Array<string>;
-// };
-export default function useTitles(game: IGamePlayer) {
-  const [title, setTitle] = useState({});
+export default function useTitles(game: IGamePlayer): [value: typeTitles, handler: (hole: number) => Promise<void>] {
+  const [title, setTitle] = useState(eightTeen());
   // const [birdie, setBirdie] = useState<string[]>([]);
   // const [eagle, setEagle] = useState<string[]>([]);
   // 함수 정의
