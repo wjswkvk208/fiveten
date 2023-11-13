@@ -1,6 +1,8 @@
 import { IGamePlayer, IPar } from "@/types/game.t";
 import { IPlayer } from "@/types/player.t";
 import { IScore, Score } from "@/types/score.t";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function getCombination<Type>(elements: Array<Type>, pick: number) {
   // 기저사례: 골라야 하는 길이가 1이면 각 원소가 조합이 된다.
@@ -22,7 +24,6 @@ export default function CalcMoney(hole: number, game: IGamePlayer | undefined) {
   if (game === undefined) return;
 
   const Money = new Map<string, number>();
-
   // 조합
 
   const ArrMatch = getCombination<IPlayer>(game.players, 2);

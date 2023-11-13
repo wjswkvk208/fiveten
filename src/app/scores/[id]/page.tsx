@@ -7,20 +7,25 @@ import useGame, { EditGame } from "@/hooks/Game";
 import { IPlayer } from "@/types/player.t";
 import PlayerInputDialog from "@/components/PlayerInputDialog";
 import { Score } from "@/types/score.t";
-import { GameScore } from "@/types/game.t";
+import { GameScore, IGamePlayer } from "@/types/game.t";
 import BirdieModal from "@/components/EventModal";
 import ScoreBoard from "@/components/ScoreBoard";
 import CalcMoney from "@/utils/money";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import useTitles from "@/hooks/Title";
 
 const mapToObject = (map: any) => Object.fromEntries(map.entries());
 
 export default function Scores({ params }: { params: { id: string } }) {
   const { game, isLoading, error, mutate } = useGame(params.id);
+
   const [round, setRound] = useState("first");
   const [hole, setHole] = useState(1);
 
   const [open, setOpen] = useState(false);
-
+  const [titles, setTitles] = useTitles(game as IGamePlayer);
+  const MySwal = withReactContent(Swal);
   const { trigger } = EditGame(params.id);
   const gameInstance = new GameScore(game);
 
@@ -31,9 +36,35 @@ export default function Scores({ params }: { params: { id: string } }) {
 
   const handleClose = () => {
     if (!game) return;
+
+    setTitles(hole as number);
     setOpen(false);
     trigger({ money: { ...game.money, [hole]: mapToObject(CalcMoney(hole, game)) } });
   };
+
+  React.useEffect(() => {
+    if (titles && titles[hole]?.birdie.length) {
+      MySwal.fire({
+        title: <p>Nice Birdie!</p>,
+        icon: "success",
+        didOpen: () => {
+          // `MySwal` is a subclass of `Swal` with all the same instance & static methods
+          // MySwal.showLoading();
+        },
+      });
+    }
+
+    if (titles && titles[hole]?.eagle.length) {
+      MySwal.fire({
+        title: <p>Amazing Eagle!</p>,
+        icon: "success",
+        didOpen: () => {
+          // `MySwal` is a subclass of `Swal` with all the same instance & static methods
+          // MySwal.showLoading();
+        },
+      });
+    }
+  }, [titles]);
 
   const handleHole = (e: any) => {
     setHole(e.target.value);
