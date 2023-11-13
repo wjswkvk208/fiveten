@@ -115,7 +115,13 @@ export default function Scores({ params }: { params: { id: string } }) {
                       return (
                         <TableCell
                           align="center"
-                          sx={{ px: 0 }}
+                          sx={{
+                            px: 0,
+                            width: 40,
+                            "&:hover": {
+                              cursor: "pointer",
+                            },
+                          }}
                           key={k}
                           onClick={() => {
                             handleClickOpen(Number(k));
@@ -148,6 +154,12 @@ export default function Scores({ params }: { params: { id: string } }) {
                           align="center"
                           onClick={() => {
                             handleClickOpen(i + 1);
+                          }}
+                          sx={{
+                            px: 0,
+                            "&:hover": {
+                              cursor: "pointer",
+                            },
                           }}
                         >
                           {p !== 0 ? p : "-"}

@@ -39,7 +39,18 @@ export default function ScoreBoard(props: { money: IMoney; player: IPlayer; roun
           })
           .map((s, i) => {
             return (
-              <TableCell align="center" sx={{ px: 0 }} key={i + 1} onClick={() => props.onClick(i + 1)}>
+              <TableCell
+                align="center"
+                sx={{
+                  width: 40,
+                  px: 0,
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                }}
+                key={i + 1}
+                onClick={() => props.onClick(i + 1)}
+              >
                 {s ?? "-"}
               </TableCell>
             );
@@ -63,7 +74,7 @@ export default function ScoreBoard(props: { money: IMoney; player: IPlayer; roun
           {format.format(thisHole)}
         </TableCell>
         <TableCell align="right" colSpan={3}>
-          현재까지 계산
+          전체 계산
         </TableCell>
         <TableCell align="right" colSpan={2}>
           {format.format(totalHole)}
