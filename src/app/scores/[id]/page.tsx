@@ -15,6 +15,10 @@ import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import useTitles from "@/hooks/Title";
 import { typeTitles } from "@/types/title.t";
+import Image from "next/image";
+import jordan from "./../../../../public/static/images/cards/jordan.gif";
+import eagle from "./../../../../public/static/images/cards/eagle.gif";
+import birdie from "./../../../../public/static/images/cards/birdie.gif";
 
 const mapToObject = (map: any) => Object.fromEntries(map.entries());
 
@@ -44,28 +48,35 @@ export default function Scores({ params }: { params: { id: string } }) {
   };
 
   React.useEffect(() => {
-    if (titles && titles[hole as keyof typeTitles].birdie.length) {
-      MySwal.fire({
-        title: <p>Nice Birdie!</p>,
-        icon: "success",
-        didOpen: () => {
-          // `MySwal` is a subclass of `Swal` with all the same instance & static methods
-          // MySwal.showLoading();
-        },
-      });
-    }
+    const Queue = MySwal.mixin({});
 
-    if (titles && titles[hole as keyof typeTitles].eagle.length) {
-      MySwal.fire({
-        title: <p>Amazing Eagle!</p>,
-        icon: "success",
-        didOpen: () => {
-          // `MySwal` is a subclass of `Swal` with all the same instance & static methods
-          // MySwal.showLoading();
-        },
-      });
-    }
-  }, [titles]);
+    (async () => {
+      if (titles && titles[hole as keyof typeTitles].birdie.length) {
+        await Queue.fire({
+          title: <p>Nice Birdie!</p>,
+          html: <Image src={birdie} width={500} height={240} alt="나이스 버디" />,
+          didOpen: () => {},
+        });
+      }
+
+      if (titles && titles[hole as keyof typeTitles].eagle.length) {
+        await Queue.fire({
+          title: <p>Amazing Eagle!</p>,
+          html: <Image src={eagle} width={500} height={240} alt="어메이징 이글" />,
+          didOpen: () => {},
+        });
+      }
+
+      if (titles && titles[hole as keyof typeTitles].quadruple.length) {
+        await Queue.fire({
+          title: "동반자들의 속마음",
+          //html: '<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><img src="../../../../public/static/images/cards/jordan.gif" width="100%" height="100%" style="position:absolute" frameBorder="0"  ></img></div>',
+          html: <Image src={jordan} width={500} height={240} alt="동반자들의 속마음" />,
+          // didOpen: () => {},
+        });
+      }
+    })();
+  }, [MySwal, hole, titles]);
 
   const handleHole = (e: any) => {
     setHole(e.target.value);

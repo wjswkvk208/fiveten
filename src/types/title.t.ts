@@ -2,7 +2,16 @@ export type typeTitle = {
   // hole: number;
   birdie: Array<string>;
   eagle: Array<string>;
+  quadruple: Array<string>;
 };
+
+function Title() {
+  return {
+    birdie: [],
+    eagle: [],
+    quadruple: [],
+  } as typeTitle;
+}
 
 export type typeTitles = {
   1: typeTitle;
@@ -26,38 +35,23 @@ export type typeTitles = {
 };
 export function eightTeen() {
   return {
-    1: {
-      birdie: [],
-      eagle: [],
-    } as typeTitle,
-    2: {
-      birdie: [],
-      eagle: [],
-    } as typeTitle,
-    3: {
-      birdie: [],
-      eagle: [],
-    } as typeTitle,
-    4: {
-      birdie: [],
-      eagle: [],
-    } as typeTitle,
-    5: {
-      birdie: [],
-      eagle: [],
-    } as typeTitle,
-    6: { birdie: [], eagle: [] } as typeTitle,
-    7: { birdie: [], eagle: [] } as typeTitle,
-    8: { birdie: [], eagle: [] } as typeTitle,
-    9: { birdie: [], eagle: [] } as typeTitle,
-    10: { birdie: [], eagle: [] } as typeTitle,
-    11: { birdie: [], eagle: [] } as typeTitle,
-    12: { birdie: [], eagle: [] } as typeTitle,
-    13: { birdie: [], eagle: [] } as typeTitle,
-    14: { birdie: [], eagle: [] } as typeTitle,
-    15: { birdie: [], eagle: [] } as typeTitle,
-    16: { birdie: [], eagle: [] } as typeTitle,
-    17: { birdie: [], eagle: [] } as typeTitle,
-    18: { birdie: [], eagle: [] } as typeTitle,
+    1: Title(),
+    2: Title(),
+    3: Title(),
+    4: Title(),
+    5: Title(),
+    6: Title(),
+    7: Title(),
+    8: Title(),
+    9: Title(),
+    10: Title(),
+    11: Title(),
+    12: Title(),
+    13: Title(),
+    14: Title(),
+    15: Title(),
+    16: Title(),
+    17: Title(),
+    18: Title(),
   };
 }
