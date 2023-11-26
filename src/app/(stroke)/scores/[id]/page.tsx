@@ -16,12 +16,14 @@ import Swal from "sweetalert2";
 import useTitles from "@/hooks/Title";
 import { typeTitles } from "@/types/title.t";
 import Image from "next/image";
-import jordan from "/public/static/images/cards/jordan.gif";
-import eagle from "/public/static/images/cards/eagle.gif";
-import birdie from "/public/static/images/cards/birdie.gif";
+// import jordan from "/public/static/images/cards/jordan.gif";
+// import eagle from "/public/static/images/cards/eagle.gif";
+// import birdie from "/public/static/images/cards/birdie.gif";
 
 const mapToObject = (map: any) => Object.fromEntries(map.entries());
-
+const imageLoader = ({ src, width, quality }: any) => {
+  return `https://img.내기골프.com/${src}?w=${width}&q=${quality || 75}`;
+};
 export default function Scores({ params }: { params: { id: string } }) {
   const { game, isLoading, error, mutate } = useGame(params.id);
 
@@ -54,7 +56,7 @@ export default function Scores({ params }: { params: { id: string } }) {
       if (titles && titles[hole as keyof typeTitles].birdie.length) {
         await Queue.fire({
           title: <p>Nice Birdie!</p>,
-          html: <Image src={birdie} width={500} height={240} alt="나이스 버디" />,
+          html: <Image loader={imageLoader} src={"cards/birdie.gif"} width={500} height={240} alt="나이스 버디" />,
           didOpen: () => {},
         });
       }
@@ -62,7 +64,7 @@ export default function Scores({ params }: { params: { id: string } }) {
       if (titles && titles[hole as keyof typeTitles].eagle.length) {
         await Queue.fire({
           title: <p>Amazing Eagle!</p>,
-          html: <Image src={eagle} width={500} height={240} alt="어메이징 이글" />,
+          html: <Image loader={imageLoader} src={"cards/eagle.gif"} width={500} height={240} alt="어메이징 이글" />,
           didOpen: () => {},
         });
       }
@@ -71,7 +73,7 @@ export default function Scores({ params }: { params: { id: string } }) {
         await Queue.fire({
           title: "동반자들의 속마음",
           //html: '<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><img src="../../../../public/static/images/cards/jordan.gif" width="100%" height="100%" style="position:absolute" frameBorder="0"  ></img></div>',
-          html: <Image src={jordan} width={500} height={240} alt="동반자들의 속마음" />,
+          html: <Image loader={imageLoader} src={"cards/jordan.gif"} width={500} height={240} alt="동반자들의 속마음" />,
           // didOpen: () => {},
         });
       }
