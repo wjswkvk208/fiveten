@@ -15,10 +15,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "@/components/Copyright";
 import { blue } from "@mui/material/colors";
-import { useCheck, useLogin } from "@/hooks/Auth";
-import { Alert } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { signIn, signOut, useSession } from "next-auth/react";
+
+import { signIn } from "next-auth/react";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme({
@@ -45,21 +43,6 @@ export default function Login() {
       callbackUrl: "/board",
     });
   };
-
-  // React.useEffect(() => {
-  //   if (loginError) {
-  //     // console.log("Error", loginError);
-  //   }
-
-  //   if (loginData) {
-  //     router.push("/");
-  //     try {
-  //       localStorage.setItem("user", JSON.stringify(loginData));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // }, [loginData, loginError, router]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -106,7 +89,7 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+            {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
 
             {/* {loginError && <Alert severity="error">{loginError.message}</Alert>} */}
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
@@ -114,9 +97,9 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                {/* <Link href="#" variant="body2">
                   Forgot password?
-                </Link>
+                </Link> */}
               </Grid>
               <Grid item>
                 <Link href="/register" variant="body2">
