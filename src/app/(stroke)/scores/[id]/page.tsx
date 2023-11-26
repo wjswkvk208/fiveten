@@ -16,9 +16,9 @@ import Swal from "sweetalert2";
 import useTitles from "@/hooks/Title";
 import { typeTitles } from "@/types/title.t";
 import Image from "next/image";
-import jordan from "./../../../../public/static/images/cards/jordan.gif";
-import eagle from "./../../../../public/static/images/cards/eagle.gif";
-import birdie from "./../../../../public/static/images/cards/birdie.gif";
+import jordan from "/public/static/images/cards/jordan.gif";
+import eagle from "/public/static/images/cards/eagle.gif";
+import birdie from "/public/static/images/cards/birdie.gif";
 
 const mapToObject = (map: any) => Object.fromEntries(map.entries());
 
