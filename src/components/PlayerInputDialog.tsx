@@ -20,7 +20,7 @@ const PlayerInputDialog = (props: any) => {
       });
     } else if (!par[hole]) {
     }
-  }, [par]);
+  }, [game.par, hole, par, trigger]);
 
   return (
     <Dialog fullScreen open={open} onClose={onClose} TransitionComponent={Transition}>

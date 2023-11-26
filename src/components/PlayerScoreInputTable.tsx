@@ -22,7 +22,7 @@ const PlayerScoreInputTable = (props: any) => {
         }
       );
     }
-  }, []);
+  }, [hole, player.score, trigger]);
   if (!player) {
     return <></>;
   }

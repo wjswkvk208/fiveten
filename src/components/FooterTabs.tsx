@@ -19,34 +19,37 @@ export default function FooterTabs(props: any) {
     else router.push(href + "/" + props.gameId);
   };
 
-  const menu = [
-    {
-      label: "플레이어",
-      url: "/players",
-    },
-    {
-      label: "규칙",
-      url: "/rules",
-    },
-    {
-      label: "스코어",
-      url: "/scores",
-    },
-    {
-      label: "도움말",
-      url: "/help",
-    },
-    {
-      label: "게시판",
-      url: "/board",
-    },
-  ];
+  const menu = React.useMemo(
+    () => [
+      {
+        label: "플레이어",
+        url: "/players",
+      },
+      {
+        label: "규칙",
+        url: "/rules",
+      },
+      {
+        label: "스코어",
+        url: "/scores",
+      },
+      {
+        label: "도움말",
+        url: "/help",
+      },
+      {
+        label: "게시판",
+        url: "/board",
+      },
+    ],
+    []
+  );
 
   React.useEffect(() => {
     const page = pathname.split("/")[2];
     const v = menu.findIndex(m => m.url.indexOf(page) === 1);
     setValue(v);
-  }, [pathname]);
+  }, [menu, pathname]);
 
   return (
     <BottomNavigation showLabels value={value}>
