@@ -5,7 +5,7 @@ import useGame, { CreateGame } from "@/hooks/Game";
 import { CreatePlayer, RemovePlayer } from "@/hooks/Player";
 import PlayerInput from "@/components/PlayerInput";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import CustomStepper from "@/components/Stepper";
+
 export default function Players(props: any) {
   const { game, isLoading, error, mutate } = useGame(props.params.id);
   const { player, trigger: createTrigger, isMutating: createMutate } = CreatePlayer(props.params.id);
@@ -47,6 +47,16 @@ export default function Players(props: any) {
             </Button>
           </ButtonGroup>
         )}
+
+        <ButtonGroup variant="outlined" aria-label="outlined button group" sx={{ m: 1 }}>
+          <Button
+            href={`/rules/${props.params.id}`}
+            // disabled={createMutate}
+            // startIcon={<PersonAddAlt1Icon />}
+          >
+            {"다음"}
+          </Button>
+        </ButtonGroup>
       </Box>
     </>
   );

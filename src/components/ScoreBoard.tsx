@@ -61,20 +61,20 @@ export default function ScoreBoard(props: { money: IMoney; player: IPlayer; roun
         </TableCell>
       </TableRow>
       <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-        <TableCell component="th" scope="row">
+        <TableCell component="th" scope="row" colSpan={1}>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
 
         <TableCell align="right" colSpan={3}>
-          이번홀 계산
+          현재 홀
         </TableCell>
         <TableCell align="right" colSpan={2}>
           {format.format(thisHole)}
         </TableCell>
         <TableCell align="right" colSpan={3}>
-          전체 계산
+          누계
         </TableCell>
         <TableCell align="right" colSpan={2}>
           {format.format(totalHole)}

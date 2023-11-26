@@ -1,16 +1,17 @@
-import { IPlayer } from "@/types/player.t";
 import { Score } from "@/types/score.t";
-import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 
 export const CreatePlayer = (id: string) => {
+  const namer = require("korean-name-generator");
+  const name = namer.generate(true);
+
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: "",
+      name: name,
       money: 0,
       score: Score(),
       gameId: id,

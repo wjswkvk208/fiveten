@@ -5,7 +5,7 @@ import { Alert, Checkbox, CircularProgress, FormControlLabel, Grid, TextField, T
 import { useEffect, useState } from "react";
 
 export default function Rules({ params }: { params: { id: string } }) {
-  const { game, isLoading, error } = useGame(params.id);
+  const { game, isLoading, error, mutate } = useGame(params.id);
   const { trigger } = EditGame(params.id);
   const [rules, setRules] = useState({ ...game?.rules });
 

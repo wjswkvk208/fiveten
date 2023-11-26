@@ -2096,6 +2096,11 @@ keyv@^4.5.3:
   dependencies:
     json-buffer "3.0.1"
 
+korean-name-generator@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/korean-name-generator/-/korean-name-generator-1.0.4.tgz#3617486284424557efaec26f2a6a671fa5a2d2d9"
+  integrity sha512-iIxlar4KRYg+wVsfDs6HIrAD8Z4UkCPtIzINckNXzE4paABXYDZQx4GeTA4YxU6zHxD9d+WLS7NdykqzKj/8Xw==
+
 language-subtag-registry@~0.3.2:
   version "0.3.22"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.22.tgz#2e1500861b2e457eba7e7ae86877cbd08fa1fd1d"

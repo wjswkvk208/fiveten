@@ -17,6 +17,7 @@
     "@sweetalert2/theme-material-ui": "^5.0.15",
     "@types/qs": "^6.9.10",
     "bson": "^6.2.0",
+    "korean-name-generator": "^1.0.4",
     "next": "13.5.4",
     "next-auth": "^4.24.5",
     "qs": "^6.11.2",

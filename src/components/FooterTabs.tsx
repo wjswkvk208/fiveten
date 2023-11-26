@@ -6,10 +6,33 @@ import { usePathname, useRouter } from "next/navigation";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 import ScoreboardOutlinedIcon from "@mui/icons-material/ScoreboardOutlined";
-import ConstructionOutlinedIcon from "@mui/icons-material/ConstructionOutlined";
+
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import EventNoteIcon from "@mui/icons-material/EventNote";
-import Link from "next/link";
+
+const menu = [
+  {
+    label: "플레이어",
+    url: "/players",
+  },
+  {
+    label: "규칙",
+    url: "/rules",
+  },
+  {
+    label: "스코어",
+    url: "/scores",
+  },
+  {
+    label: "도움말",
+    url: "/help",
+  },
+  {
+    label: "게시판",
+    url: "/board",
+  },
+];
+
 export default function FooterTabs(props: any) {
   const [value, setValue] = React.useState(0);
   const router = useRouter();
@@ -19,37 +42,11 @@ export default function FooterTabs(props: any) {
     else router.push(href + "/" + props.gameId);
   };
 
-  const menu = React.useMemo(
-    () => [
-      {
-        label: "플레이어",
-        url: "/players",
-      },
-      {
-        label: "규칙",
-        url: "/rules",
-      },
-      {
-        label: "스코어",
-        url: "/scores",
-      },
-      {
-        label: "도움말",
-        url: "/help",
-      },
-      {
-        label: "게시판",
-        url: "/board",
-      },
-    ],
-    []
-  );
-
   React.useEffect(() => {
-    const page = pathname.split("/")[2];
+    const page = pathname.split("/")[1];
     const v = menu.findIndex(m => m.url.indexOf(page) === 1);
     setValue(v);
-  }, [menu, pathname]);
+  }, [pathname]);
 
   return (
     <BottomNavigation showLabels value={value}>
