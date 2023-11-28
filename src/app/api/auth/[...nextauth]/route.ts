@@ -3,6 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import NaverProvider from "next-auth/providers/naver";
 
+const tokenSet = {} as tokenType;
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -49,13 +50,47 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      //console.log("token", token, user);
+    async signIn({ user, account, profile, email, credentials }: any) {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/snslogin`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          password: user.id,
+          username: user.name,
+          sns: account.provider,
+        }),
+      });
+
+      if (res.status === 401) {
+        const error = new Error("로그인을 해주세요.");
+        throw error;
+      }
+      const r = await res.json();
+
+      if (r) {
+        tokenSet.accessToken = r.accessToken;
+        return r;
+      } else {
+        // Return false to display a default error message
+        // return false;
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
+        return "/register";
+      }
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (tokenSet.accessToken) {
+        token.accessToken = tokenSet.accessToken; //<--- token 객체에 다시 담아서
+        // token.id = profile.id
+      }
       return { ...token, ...user };
     },
 
     async session({ session, token }) {
-      //console.log("session", token);
       session.user = token as any;
       //session.accessToken = token.accessToken as string;
       return session;
