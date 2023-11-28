@@ -1,13 +1,22 @@
 "use client";
 
 import useGame, { EditGame } from "@/hooks/Game";
-import { Alert, Checkbox, CircularProgress, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, ButtonGroup, Checkbox, CircularProgress, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Rules({ params }: { params: { id: string } }) {
   const { game, isLoading, error, mutate } = useGame(params.id);
   const { trigger } = EditGame(params.id);
-  const [rules, setRules] = useState({ ...game?.rules });
+  const [rules, setRules] = useState(
+    { ...game?.rules } ?? {
+      bet: 5000,
+      birdie: 10000,
+      eagle: 50000,
+      three: true,
+      triple: true,
+      draw: true,
+    }
+  );
 
   const handleChangeRule = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRules({
@@ -57,6 +66,22 @@ export default function Rules({ params }: { params: { id: string } }) {
           <FormControlLabel control={<Checkbox color="secondary" name="draw" checked={rules.draw} onChange={handleChangeRule} />} label="무승부의 경우 다음홀 두배판" />
         </Grid>
       </Grid>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <ButtonGroup variant="outlined" aria-label="outlined button group" sx={{ m: 1 }}>
+          <Button
+            href={`/scores/${params.id}`}
+            // disabled={createMutate}
+            // startIcon={<PersonAddAlt1Icon />}
+          >
+            {"다음"}
+          </Button>
+        </ButtonGroup>
+      </Box>
     </>
   );
 }
