@@ -104,7 +104,7 @@ export default function Login() {
               variant="outlined"
               sx={{ mt: 3, mb: 2 }}
               onClick={async () => {
-                await signIn("naver");
+                await signIn("naver", { redirect: true, callbackUrl: "/board" });
               }}
             >
               Naver 로그인
