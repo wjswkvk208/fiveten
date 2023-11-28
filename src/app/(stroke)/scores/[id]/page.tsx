@@ -22,7 +22,7 @@ import Image from "next/image";
 
 const mapToObject = (map: any) => Object.fromEntries(map.entries());
 const imageLoader = ({ src, width, quality }: any) => {
-  return `https://img.내기골프.com/${src}?w=${width}&q=${quality || 75}`;
+  return `${process.env.NEXT_PUBLIC_IMAGE_URL}/${src}?w=${width}&q=${quality || 75}`;
 };
 export default function Scores({ params }: { params: { id: string } }) {
   const { game, isLoading, error, mutate } = useGame(params.id);
