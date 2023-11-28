@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import NaverProvider from "next-auth/providers/naver";
 
 const handler = NextAuth({
   providers: [
@@ -40,6 +41,11 @@ const handler = NextAuth({
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
+    }),
+
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID ?? "",
+      clientSecret: process.env.NAVER_CLIENT_SECRET ?? "",
     }),
   ],
   callbacks: {

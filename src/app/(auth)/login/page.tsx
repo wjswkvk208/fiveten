@@ -62,13 +62,14 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               ref={emailRef}
               onChange={(e: any) => {
                 emailRef.current = e.target.value;
               }}
               margin="normal"
+              type="email"
               required
               fullWidth
               id="email"
@@ -76,6 +77,7 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("이메일을 입력해주세요.")}
             />
             <TextField
               ref={passwordRef}
@@ -94,6 +96,18 @@ export default function Login() {
             {/* {loginError && <Alert severity="error">{loginError.message}</Alert>} */}
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               로그인
+            </Button>
+            <Button
+              type="button"
+              color="success"
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={async () => {
+                await signIn("naver");
+              }}
+            >
+              Naver 로그인
             </Button>
             <Grid container>
               <Grid item xs>
